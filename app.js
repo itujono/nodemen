@@ -6,8 +6,9 @@ import bodyParser from "body-parser"
 import methodOverride from "method-override"
 import flash from "connect-flash"
 import session from "express-session"
-import ideasModel from "./models/Idea"
 import db from "./config/database"
+import ideas from "./routes/ideas"
+import users from "./routes/users"
 import { read } from "fs";
 
 
@@ -15,6 +16,7 @@ const app = express()
 
 // Serve static files dan assets
 app.use("/static", express.static(path.join(__dirname, "public")))
+
 
 
 // bodyParser middleware
@@ -35,11 +37,12 @@ app.use((req, res, next) => {
 })
 
 
+
+
+
 mongoose.connect(db.mongoURI)
     .then(() => console.log("MongoDB sudah terkonek dengan baik..."))
 
-// Load IdeaModels nya
-const Idea = mongoose.model("ideasModel")
 
 
 // Template engine
@@ -54,12 +57,7 @@ app.get("/", (req, res) => {
     res.render("index", { title, sub })
 })
 
-app.get("/ideas", (req, res) => {
-    Idea.find({}).sort({createdAt: "desc"})
-    .then(ideas => { res.render("ideas/index", { ideas }) })
-})
 
-app.get("/ideas/add", (req, res) => res.render("ideas/add"))
 
 app.get("/about", (req, res) => {
     const title = "Ini adalah About page",
@@ -79,50 +77,10 @@ app.get("/contact", (req, res) => {
     })
 })
 
-// Munculin form Edit Idea
-app.get("/ideas/edit/:id", (req, res) => {
-    Idea.findOne({
-        _id: req.params.id
-    }).then(idea => res.render("ideas/edit", { idea }))
-})
 
-
-// Proses Edit Idea
-app.put("/ideas/:id", (req, res) => {
-    Idea.findOne({
-        _id: req.params.id
-    }).then(idea => {
-        idea.title = req.body.title
-        idea.description = req.body.description
-
-        idea.save().then(updatedIdea => {
-            req.flash("successMessage", "Okay! Sudin berhasil diedit wak. Heheh.")
-            res.redirect("/ideas")
-        })
-    })
-})
-
-// Process Form
-app.post("/ideas", (req, res) => {
-    const newIdea = {
-        title: req.body.title,
-        description: req.body.description
-    }
-
-    const idea = new Idea(newIdea).save().then(idea => {
-        req.flash("successMessage", "Okay! Yang kau mau sudin awak add. Heheh.")
-        res.redirect("/ideas")
-    })
-})
-
-// Delete Idea
-app.delete("/ideas/:id", (req, res) => {
-    Idea.remove({ _id: req.params.id })
-    .then(() => {
-        req.flash("successMessage", "Yup! Sudin berhasil ya dihapus. Heheh. Cool!")
-        res.redirect("/ideas")
-    })
-})
+// Load router penggantinya
+app.use("/ideas", ideas)
+app.use("/users", users)
 
 
 

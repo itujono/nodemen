@@ -1,6 +1,15 @@
 
+.navbar {
+    padding-right: 2em;
+    padding-left: 2em;
+}
+
 .navbar-item {
     color: #eee;
+}
+
+.navbar-dropdown .navbar-item {
+    color: initial
 }
 
 .navbar-item img {
@@ -27,4 +36,12 @@
         -webkit-transform: rotate(360deg);
         -moz-transform: rotate(360deg)
     }
+}
+
+.form, .content {
+    margin-top: 3em;
+}
+
+.content .title {
+    font-weight: bold;
 }

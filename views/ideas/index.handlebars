@@ -1,0 +1,27 @@
+<div class="container">
+
+    <div class="content">
+        <h2 class="title">Ini Semua Post</h2>
+        <h5 class="subtitle">Nah apa yang kamu mau mungkin belum terwujud</h5>
+    </div>
+
+    {{#each ideas}}
+
+        <div class="box">
+            <div class="content">
+                <h2>{{title}}</h2>
+                {{description}}
+            </div>
+            <a href="/ideas/edit/{{id}}" class="button is-info">Edit...</a>
+            <form class="is-inline-block" action="/ideas/{{id}}?_method=DELETE" method="POST">
+                <input type="hidden" name="_method" value="DELETE">
+                <button type="submit" class="button is-danger">
+                    Hapus
+                </button>
+            </form>
+        </div>
+
+    {{else}}
+        <p>Wah nggak ada kok ide yang ditulis di sini.</p>
+    {{/each}}
+</div>

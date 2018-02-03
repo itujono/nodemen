@@ -1,0 +1,17 @@
+<div class="container">
+    {{#if successMessage}}
+        <article class="message is-info">
+            <div class="message-body">
+                {{successMessage}}
+            </div>
+        </article>
+    {{/if}}
+
+    {{#if errorMessage}}
+        <article class="message is-danger">
+            <div class="message-body">
+                {{errorMessage}}
+            </div>
+        </article>
+    {{/if}}
+</div>

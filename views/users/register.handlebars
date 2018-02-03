@@ -6,23 +6,29 @@
             <h5 class="subtitle">Kamu mau register? Apa yang kamu pikirkan ketika kelas 5 SD semester 3?</h5>
         </div>
 
-        <form action="" class="form">
+        <form action="/users/register" method="POST" class="form">
+            <div class="field">
+                <label for="name" class="label">Nama kamu</label>
+                <div class="control">
+                    <input type="text" name="name" value="{{name}}" class="input" placeholder="Rusmanto Geni">
+                </div>
+            </div>
             <div class="field">
                 <label for="email" class="label">Email kamu</label>
                 <div class="control">
-                    <input type="email" name="email" class="input" placeholder="jono@gmail.com">
+                    <input type="email" name="email" value="{{email}}" class="input" placeholder="jono@gmail.com">
                 </div>
             </div>
             <div class="field">
                 <label for="password" class="label">Password kamu</label>
                 <div class="control">
-                    <input type="password" name="password" class="input" placeholder="minimal 6 karakter ya">
+                    <input type="password" name="password" value="{{password}}" class="input" placeholder="minimal 6 karakter ya">
                 </div>
             </div>
             <div class="field">
                 <label for="passwordRepeat" class="label">Ulangi password kamu</label>
                 <div class="control">
-                    <input type="password" name="passwordRepeat" class="input" placeholder="minimal 6 karakter ya">
+                    <input type="password" name="passwordRepeat" value="{{passwordRepeat}}" class="input" placeholder="minimal 6 karakter ya">
                 </div>
             </div>
             <div class="field">

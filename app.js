@@ -7,6 +7,7 @@ import methodOverride from "method-override"
 import flash from "connect-flash"
 import session from "express-session"
 import ideasModel from "./models/Idea"
+import db from "./config/database"
 import { read } from "fs";
 
 
@@ -34,7 +35,7 @@ app.use((req, res, next) => {
 })
 
 
-mongoose.connect("mongodb://localhost/idea-app")
+mongoose.connect(db.mongoURI)
     .then(() => console.log("MongoDB sudah terkonek dengan baik..."))
 
 // Load IdeaModels nya
